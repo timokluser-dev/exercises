@@ -1,6 +1,6 @@
 export class PascalTriangle {
     /**
-     * 
+     * @see https://en.wikipedia.org/wiki/Pascal%27s_triangle
      * @param rows how many rows
      * @returns array containing the triangle
      */
