@@ -6,8 +6,7 @@ export class Anagram {
      * @returns all anagrams
      */
     getAnagrams(word: string, words: string[]): string[] {
-        const anagrams = words.filter(value => this.isAnagram(word.toLowerCase(), value.toLowerCase()));
-        return anagrams;
+        return words.filter(value => this.isAnagram(word.toLowerCase(), value.toLowerCase()));
     }
 
     /**
@@ -17,22 +16,24 @@ export class Anagram {
      * @returns if is anagram
      */
     private isAnagram(word: string, wordToTest: string): boolean {
-        if (word.length != wordToTest.length || word == wordToTest) return false;
+        if (word === wordToTest) return false;
 
-        let wordToTestRemainingChars = Array.from(wordToTest);
+        return this.areEqual(Array.from(word), Array.from(wordToTest));
+    }
 
-        Array.from(word).forEach(char => {
-            const indexOfChar = wordToTestRemainingChars.indexOf(char);
-            const wordToTestContainsChar = indexOfChar != -1;
-            
-            if (wordToTestContainsChar) {
-                // remove from remaining chars
-                wordToTestRemainingChars.splice(indexOfChar, 1);
-            } else {
-                return false;
-            }
-        });
+    /**
+     * 
+     * @param arrayOne first array
+     * @param arrayTwo second array
+     * @returns if both are equal
+     */
+    private areEqual(arrayOne: string[], arrayTwo: string[]): boolean {
+        if (arrayOne.length !== arrayTwo.length) return false;
 
-        return wordToTestRemainingChars.length == 0;
+        arrayOne = arrayOne.sort();
+        arrayTwo = arrayTwo.sort();
+        const sharedChars = arrayOne.filter((element, index) => element === arrayTwo[index]);
+
+        return sharedChars.length === arrayTwo.length;
     }
 }
