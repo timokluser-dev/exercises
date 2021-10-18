@@ -12,7 +12,7 @@ export class PrimeNumber {
     isPrime(num: number): boolean {
         if (num < 2) return false;
 
-        for (let i = (num - 1); i > 1; i--) {
+        for (let i = 2; i < num; i++) {
             if (num % i == 0) return false;
         }
 
