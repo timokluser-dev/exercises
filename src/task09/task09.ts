@@ -131,7 +131,7 @@ export class StoreOpeningHours {
     private getDateTimeFromHourString(date: Date, hourMinute: string) {
         const hoursAndMinutes = hourMinute.split(":");
         let dateTime = new Date(date.getTime());
-        dateTime.setHours(Number(hoursAndMinutes[0]), Number(hoursAndMinutes[1]));
+        dateTime.setHours(Number(hoursAndMinutes[0]), Number(hoursAndMinutes[1]), 0, 0);
 
         return dateTime;
     }
