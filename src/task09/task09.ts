@@ -7,11 +7,19 @@ export class StoreOpeningHours {
     private data: OpeningHoursConfig;
 
     /**
-     * 
+     * specify only one param.
+     * `data` has higher prio than `dataFilePath`
      * @param dataFilePath the relative path to the data.json file
+     * @param data the json content directly
      */
-    constructor(dataFilePath: string) {
-        this.data = require(dataFilePath);
+    constructor(dataFilePath: string | null, data: OpeningHoursConfig | null = null) {
+        if (data) {
+            this.data = data;
+        } else if (dataFilePath) {
+            this.data = require(dataFilePath);
+        } else {
+            this.data = { special: [], weekly: [] };
+        }
     }
 
     /**
