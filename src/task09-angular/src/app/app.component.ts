@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OpeningHour, OpeningInformations } from '../../../task09/dist';
+import { OpeningHour, OpeningInformations } from '../../../task09';
 import { DateTimeChangedEmit } from './molecules/m-datetime-picker/m-datetime-picker.component';
 import { OpeningService } from './services/opening.service';
 

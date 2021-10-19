@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OpeningHour } from '../../../../../task09/dist';
+import { OpeningHour } from '../../../../../task09';
 
 @Component({
   selector: 'app-o-opening-hours',

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OpeningHour, OpeningHoursConfig, OpeningInformations, StoreOpeningHours } from "./../../../../task09/dist";
+import { OpeningHour, OpeningHoursConfig, OpeningInformations, StoreOpeningHours } from "./../../../../task09";
 
 
 @Injectable({
