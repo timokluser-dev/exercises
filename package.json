@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build:store-open": "tsc src/task09/index.ts --declaration --esModuleInterop --target es5 --declarationDir src/task09/dist/ --sourceMap --outDir src/task09/dist/"
   },
   "author": "Liip AG",
   "license": "ISC",
