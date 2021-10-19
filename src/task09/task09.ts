@@ -1,5 +1,8 @@
 import { OpeningHour, OpeningHoursConfig } from "./OpeningHoursConfig";
 
+/**
+ * class to determine if a store is open or not. a `.json` file is used as datasource
+ */
 export class StoreOpeningHours {
     private data: OpeningHoursConfig;
 
@@ -50,10 +53,11 @@ export class StoreOpeningHours {
         const isOpen = this.isOpen(date);
         let openingInformations = new OpeningInformations(isOpen);
 
-        if (!isOpen) {
-            openingInformations.nextOpening = this.findNextOpening(date);
+        if (isOpen) {
+            openingInformations.openUntil = this.getCurrentClosing(date);
         }
 
+        openingInformations.nextOpening = this.findNextOpening(date);
         return openingInformations;
     }
 
@@ -65,8 +69,8 @@ export class StoreOpeningHours {
      */
     private isInRangeOfOpening(datetime: Date, openingHours: OpeningHour[]): boolean {
         for (const element of openingHours) {
-            let openFrom = this.getDateTime(datetime, element.open);
-            let closedFrom = this.getDateTime(datetime, element.close);
+            let openFrom = this.getDateTimeFromHourString(datetime, element.open);
+            let closedFrom = this.getDateTimeFromHourString(datetime, element.close);
 
             if (datetime >= openFrom && datetime <= closedFrom) return true;
         }
@@ -87,7 +91,7 @@ export class StoreOpeningHours {
         const todayOpenings = this.getOpeningHoursForDate(datetime);
         if (todayOpenings !== []) {
             for (const opening of todayOpenings) {
-                if (!this.isInRangeOfOpening(datetime, [opening]) && datetime < this.getDateTime(datetime, opening.close)) return this.getDateTime(datetime, opening.open);
+                if (!this.isInRangeOfOpening(datetime, [opening]) && datetime < this.getDateTimeFromHourString(datetime, opening.close)) return this.getDateTimeFromHourString(datetime, opening.open);
             }
         }
 
@@ -97,7 +101,7 @@ export class StoreOpeningHours {
             let openingHoursCurrentDate = this.getOpeningHoursForDate(datetime);
 
             if (openingHoursCurrentDate.length > 0) {
-                nextOpening = this.getDateTime(currentCheckDate, this.getOpeningHoursForDate(currentCheckDate)[0].open);
+                nextOpening = this.getDateTimeFromHourString(currentCheckDate, this.getOpeningHoursForDate(currentCheckDate)[0].open);
             }
         }
 
@@ -106,11 +110,25 @@ export class StoreOpeningHours {
 
     /**
      * 
+     * @param datetime datetime which has to be checked
+     * @returns the closing time of current opening or `null`
+     */
+    private getCurrentClosing(datetime: Date): Date | null {
+        const todayOpenings = this.getOpeningHoursForDate(datetime);
+        for (const opening of todayOpenings) {
+            if (this.isInRangeOfOpening(datetime, [opening])) return this.getDateTimeFromHourString(datetime, opening.close);
+        }
+
+        return null;
+    }
+
+    /**
+     * 
      * @param date date for the date part
      * @param hourMinute hours and minutes in string format: `hh:mm`
      * @returns the date combined with the hours & mintes
      */
-    private getDateTime(date: Date, hourMinute: string) {
+    private getDateTimeFromHourString(date: Date, hourMinute: string) {
         const hoursAndMinutes = hourMinute.split(":");
         let dateTime = new Date(date.getTime());
         dateTime.setHours(Number(hoursAndMinutes[0]), Number(hoursAndMinutes[1]));
@@ -135,14 +153,16 @@ export class StoreOpeningHours {
 export class OpeningInformations {
     public isOpen: boolean;
     public nextOpening: Date | null;
+    public openUntil: Date | null;
 
     /**
      * 
      * @param isOpen if the store is open at that time
      * @param nextOpening if not open - when next opening
      */
-    constructor(isOpen: boolean, nextOpening: Date | null = null) {
+    constructor(isOpen: boolean, nextOpening: Date | null = null, openUntil: Date | null = null) {
         this.isOpen = isOpen;
         this.nextOpening = nextOpening;
+        this.openUntil = openUntil;
     }
 }

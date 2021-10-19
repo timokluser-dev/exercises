@@ -48,28 +48,28 @@ describe('Test opening hours', () => {
     it('test store informations - open', () => {
         const openingHours = new StoreOpeningHours("./data.json");
         const result = openingHours.getInformation(new Date(2021, 9, 18, 18, 0));
-        const expected = new OpeningInformations(true, null);
+        const expected = new OpeningInformations(true, new Date(2021, 9, 19, 8, 0), new Date(2021, 9, 18, 18, 30));
         expect(result).toEqual(expected);
     });
 
     it('test store informations - closed at weekend', () => {
         const openingHours = new StoreOpeningHours("./data.json");
         const result = openingHours.getInformation(new Date(2021, 9, 17, 10, 30)); // is sunday
-        const expected = new OpeningInformations(false, new Date(2021, 9, 18, 8, 0));
+        const expected = new OpeningInformations(false, new Date(2021, 9, 18, 8, 0), null);
         expect(result).toEqual(expected);
     });
 
     it('test store informations - closed before special day', () => {
         const openingHours = new StoreOpeningHours("./data.json");
         const result = openingHours.getInformation(new Date(2019, 11, 24, 20, 30)); // 2019-12-25 is special day & closed
-        const expected = new OpeningInformations(false, new Date(2019, 11, 26, 8, 0));
+        const expected = new OpeningInformations(false, new Date(2019, 11, 26, 8, 0), null);
         expect(result).toEqual(expected);
     });
 
     it('test store informations - closed at special day', () => {
         const openingHours = new StoreOpeningHours("./data.json");
         const result = openingHours.getInformation(new Date(2019, 11, 25, 8, 30));
-        const expected = new OpeningInformations(false, new Date(2019, 11, 26, 8, 0));
+        const expected = new OpeningInformations(false, new Date(2019, 11, 26, 8, 0), null);
         expect(result).toEqual(expected);
     });
 
