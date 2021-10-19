@@ -1,0 +1,9 @@
+<ng-container *ngIf="openingHours">
+    <h2>Opening Hours</h2>
+
+    <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let opening of openingHours">
+            From {{ opening.open }} to {{ opening.close }}
+        </mat-list-item>
+    </mat-list>
+</ng-container>

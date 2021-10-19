@@ -1,0 +1,9 @@
+<mat-form-field appearance="outline">
+    <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date & time" [(ngModel)]="selectedDateTime" name="selectedDateTime">
+
+    <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+    <ngx-mat-datetime-picker #picker [enableMeridian]="false" [showSeconds]="true" (closed)="onTimepickerClosed()">
+    </ngx-mat-datetime-picker>
+</mat-form-field>
+
+<button mat-flat-button (click)="onNowClicked()" color="primary">Now</button>
