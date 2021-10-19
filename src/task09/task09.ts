@@ -166,3 +166,36 @@ export class OpeningInformations {
         this.openUntil = openUntil;
     }
 }
+
+/**
+ * helping class to generate Dates with or without Time.
+ * takes care about the js specific Date considerations
+ */
+export abstract class DateTimeHelpers {
+    /**
+     * 
+     * @param fullYear 
+     * @param month 
+     * @param day 
+     * @returns date object
+     */
+    static getDate(fullYear: number, month: number, day: number): Date {
+        return new Date(fullYear, (month - 1), day);
+    }
+
+    /**
+     * 
+     * @param fullYear 
+     * @param month 
+     * @param day 
+     * @param hours 
+     * @param minutes 
+     * @param seconds 
+     * @returns date object with time
+     */
+    static getDateTime(fullYear: number, month: number, day: number, hours: number, minutes: number, seconds: number = 0): Date {
+        let date = this.getDate(fullYear, month, day);
+        date.setHours(hours, minutes, seconds);
+        return date;
+    }
+}
