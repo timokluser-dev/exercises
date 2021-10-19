@@ -1,0 +1,19 @@
+{
+  "name": "store-openings",
+  "version": "1.0.0",
+  "description": "get informations about the opening hours of a store",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timokluser-dev/exercises.git"
+  },
+  "author": "timokluser-dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timokluser-dev/exercises/issues"
+  },
+  "homepage": "https://github.com/timokluser-dev/exercises#readme"
+}
