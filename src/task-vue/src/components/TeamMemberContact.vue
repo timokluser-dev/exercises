@@ -24,7 +24,7 @@
 
 </template>
 
-<script lang="ts">
+<script>
 import { ITeamMember } from "@/services/team-service";
 
 export default {

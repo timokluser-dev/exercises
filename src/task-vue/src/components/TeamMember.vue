@@ -15,8 +15,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { ITeamMember } from "@/services/team-service";
+<script>
+import {ITeamMember} from "@/services/team-service";
 
 export default {
   name: "TeamMember",
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     contactMe() {
-      this.$emit("selected", { teamMember: this.teamMember });
+      this.$emit("selected", {teamMember: this.teamMember});
     }
   }
 };
@@ -55,11 +55,13 @@ export default {
   .team-member__name {
     font-weight: 700;
   }
+
   .team-member__job {
     color: #a5a59f;
     font-size: 0.9rem;
     margin: 0rem;
   }
+
   .team-member__image {
     width: 100%;
     border-radius: 50%;

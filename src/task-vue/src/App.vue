@@ -9,10 +9,10 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { Options, Vue } from "vue-class-component";
 import Team from "./components/Team.vue";
-import { ITeamMember, TeamService } from "@/services/team-service";
+import { ITeamMember, TeamService } from "@/services/team-service.ts";
 
 @Options({
   components: {
@@ -20,7 +20,7 @@ import { ITeamMember, TeamService } from "@/services/team-service";
   },
   data() {
     return {
-      teamMembers: new Array<ITeamMember>()
+      teamMembers: new Array()
     };
   },
   mounted() {

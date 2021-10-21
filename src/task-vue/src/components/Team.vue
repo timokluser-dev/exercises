@@ -13,9 +13,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import TeamMember from "@/components/TeamMember";
-import TeamMemberContact from "@/components/TeamMemberContact";
+<script>
+import TeamMember from "@/components/TeamMember.vue";
+import TeamMemberContact from "@/components/TeamMemberContact.vue";
 import { ITeamMember } from "@/services/team-service";
 
 export default {
@@ -35,7 +35,7 @@ export default {
     };
   },
   methods: {
-    onTeamMemberSelected(selected: ITeamMember) {
+    onTeamMemberSelected(selected) {
       this.teamMembersSelected = selected;
       window.scrollTo(0, 0);
     }
