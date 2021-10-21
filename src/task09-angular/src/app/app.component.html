@@ -1,0 +1,29 @@
+<app-o-header></app-o-header>
+
+<div class="container mt-5">
+
+  <mat-card>
+    <app-m-datetime-picker (changed)="datetimePickerChanged($event)"></app-m-datetime-picker>
+  </mat-card>
+
+  <mat-card class="mt-5">
+    <ng-container [ngSwitch]="openingInformation?.isOpen">
+      <ng-container *ngSwitchCase="true">
+        <h2>Good news! Your favourite shop is open 😎</h2>
+        <p>It will close at {{getClosingTime()}}</p>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="false">
+        <h2>Unfortunately, the chosen shop is closed 😕</h2>
+        <p>It will open at {{getOpeningTime()}}</p>
+      </ng-container>
+    </ng-container>
+
+    <div class="mt-5">
+      <app-o-opening-hours [openingHours]="openingHours"></app-o-opening-hours>
+    </div>
+  </mat-card>
+
+</div>
+
+<router-outlet></router-outlet>
